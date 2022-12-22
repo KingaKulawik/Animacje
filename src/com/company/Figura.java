@@ -64,6 +64,8 @@ public abstract class Figura {
         return shape;
     }
 
+    public Color getColor(){ return color; }
+
     public Graphics2D getSharedBuffer() {
         return sharedBuffer;
     }
@@ -87,18 +89,26 @@ public abstract class Figura {
         int cx = bounds.x + bounds.width / 2;
         int cy = bounds.y + bounds.height / 2;
         // odbicie
-        if (cx < 0 || cx > width)
+        if (cx < 0 || cx > width) {
             dx = -dx;
-        if (cy < 0 || cy > height)
-            dy = -dy;
-        // zwiekszenie lub zmniejszenie
-        if (bounds.height > height / 3 || bounds.height < 10)
-            sf = 1 / sf;
 
-        area.transform(AffineTransform.getTranslateInstance(dx * delay, dy * delay));
+        }
+        if (cy < 0 || cy > height) {
+            dy = -dy;
+        }
+        // zwiekszenie lub zmniejszenie
+        if (bounds.height > height / 4 || bounds.height < 10) {
+            sf = 1 / sf;
+        }
+        area.transform(AffineTransform.getTranslateInstance(-cx, -cy));
+        area.transform(AffineTransform.getScaleInstance(sf, sf));
+        area.transform(AffineTransform.getTranslateInstance(cx+dx * delay*5, cy+dy * delay*5));
+
         //affineTransform.translate(cx, cy);
         //affineTransform.scale(sf, sf);
+
         area.transform(AffineTransform.getRotateInstance(an * delay, cx, cy));
+
         //affineTransform.translate(-cx, -cy);
 
         // przeksztalcenie obiektu

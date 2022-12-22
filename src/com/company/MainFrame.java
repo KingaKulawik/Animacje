@@ -7,6 +7,7 @@ public class MainFrame extends JFrame {
     private Animation animationPanel;
     private final JPanel buttonsPanel;
     private final JButton addShapeButton;
+    private final JButton deleteShapeButton;
     private final JButton toggleAnimationButton;
     private final JRadioButton squareRadioButton;
     private final JRadioButton ellipseRadioButton;
@@ -24,6 +25,7 @@ public class MainFrame extends JFrame {
         buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonsPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         addShapeButton = new JButton("Dodaj nastepna figure");
+        deleteShapeButton = new JButton("Usun figure");
         toggleAnimationButton = new JButton("Animacja");
         animationPanel = new Animation(minWidth, minHeight);
         squareRadioButton = new JRadioButton("Kwadrat");
@@ -53,6 +55,7 @@ public class MainFrame extends JFrame {
 
 
         buttonsPanel.add(addShapeButton);
+        buttonsPanel.add(deleteShapeButton);
         buttonsPanel.add(toggleAnimationButton);
         buttonsPanel.add(squareRadioButton);
         buttonsPanel.add(ellipseRadioButton);
@@ -61,6 +64,7 @@ public class MainFrame extends JFrame {
         squareRadioButton.doClick();
 
         addShapeButton.addActionListener((event) -> animationPanel.addFigure(selectedFigure));
+        deleteShapeButton.addActionListener((event) -> animationPanel.deleteFigure());
         toggleAnimationButton.addActionListener((event) -> animationPanel.toggleAnimation());
 
         this.add(buttonsPanel, BorderLayout.SOUTH);

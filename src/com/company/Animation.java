@@ -51,6 +51,10 @@ public class Animation extends JPanel implements ActionListener {
         figureToDraw.run();
     }
 
+    public void deleteFigure(){
+        if(figures.size() > 0) figures.remove(figures.size()-1);
+    }
+
     public void toggleAnimation() {
         if (timer.isRunning()) {
             timer.stop();
@@ -69,7 +73,7 @@ public class Animation extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         for (var figure : figures){
             figure.nextFrame(delay * 0.001);
-            bufferGraphics.setColor(Color.RED);
+            bufferGraphics.setColor(figure.getColor());
             bufferGraphics.fill(figure.getArea());
             bufferGraphics.draw(figure.getArea());
         }
